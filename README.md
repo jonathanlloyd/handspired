@@ -6,7 +6,7 @@ A flappy-bird clone built to test out ideas from the Handmade Hero series
 Uses SDL2, so not handmade - handspired. However, should be a good testing
 ground for things learned whilst watching the series.
 
-# Building
+# How to build
 ```bash
 $ make
 ```
