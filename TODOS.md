@@ -1,4 +1,5 @@
-# Get basic game loop & IO running
+# TODOs
+## Get basic game loop & IO running
  - [ ] Port logger
  - [ ] Launch SDL Window
  - [ ] Create game loop with fixed FPS
@@ -8,4 +9,4 @@
     - [ ] Draw player
     - [ ] Move player according to input
 
-# Basic gameplay
+## Basic gameplay
