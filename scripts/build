@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+rm -rf bin
+mkdir bin
+
+g++ \
+	./src/*.cpp \
+	-Wall \
+	-L/usr/include/SDL2 -lSDL2 \
+	-o ./bin/game
