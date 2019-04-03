@@ -2,7 +2,7 @@
 #define LOGGER_H
 
 #include<string>
-namespace handmadeish {
+namespace handspired {
 
 	enum LogLevel {
 		LOGGER_DEBUG,

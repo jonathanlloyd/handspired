@@ -3,7 +3,7 @@
 
 #include "Logger.h"
 
-using namespace handmadeish;
+using namespace handspired;
 
 int main() {
 	Logger * const logger = new Logger(LOGGER_DEBUG);

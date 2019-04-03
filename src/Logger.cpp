@@ -6,7 +6,7 @@
 
 #include "Logger.h"
 
-using namespace handmadeish;
+using namespace handspired;
 
 
 void Logger::write_to_log(
