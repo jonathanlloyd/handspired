@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "assert.h"
 #include "Logger.h"
 
 #define CGAME_DEFAULT_WINDOW_WIDTH 1080
