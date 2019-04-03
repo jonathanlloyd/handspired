@@ -21,7 +21,7 @@ int main() {
 
 	// Initialize SDL
 	err = SDL_Init(SDL_INIT_VIDEO);
-	if (err == -1) {
+	if (err < 0) {
 		logger->errorf("Failed trying to initialize SDL: %s", SDL_GetError());
 		return 1;
 	}
