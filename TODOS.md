@@ -1,6 +1,6 @@
 # TODOs
 ## Get basic game loop & IO running
- - [ ] Port logger
+ - [X] Port logger
  - [ ] Launch SDL Window
  - [ ] Create game loop with fixed FPS
  - [ ] Map controls to controller struct
