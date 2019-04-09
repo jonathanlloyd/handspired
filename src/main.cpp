@@ -7,6 +7,7 @@
 #include "GameCode.h"
 #include "Logger.h"
 
+#define LOG_LEVEL LOGGER_DEBUG
 #define CGAME_DEFAULT_WINDOW_WIDTH 1080
 #define CGAME_DEFAULT_WINDOW_HEIGHT 720
 
@@ -14,7 +15,7 @@ using namespace handspired;
 
 
 int main() {
-	Logger * const logger = new Logger(LOGGER_DEBUG);
+	Logger * const logger = new Logger(LOG_LEVEL);
 	
 	logger->info("Game started");
 
@@ -61,18 +62,45 @@ int main() {
 	uint64_t frame_count = 0;
 	uint32_t time_last_flipped = 0;
 	uint32_t time_last_loop_ended = 0;
+	// TODO(jonathan): Move state off the stack?
 	GameState game_state = {};
+	ControllerState controller_state = {};
 
 	while (running) {
+		// Process events
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				logger->info("Received quit event, exiting now");
-				running = false;
+			switch (event.type) {
+				case SDL_QUIT:
+					logger->info("Received quit event, exiting now");
+					running = false;
+					break;
+				case SDL_KEYDOWN:
+					if (event.key.keysym.sym == SDLK_SPACE) {
+						controller_state.action_button_down = true;
+					}
+					break;
+				case SDL_KEYUP:
+					if (event.key.keysym.sym == SDLK_SPACE) {
+						controller_state.action_button_down = false;
+					}
+					break;
 			}
 		}
-		update_and_render(&game_state);
-		SDL_Delay(10);
+
+		// Get input
+		SDL_GetMouseState(&controller_state.mouse_x, &controller_state.mouse_y);
+		logger->debugf(
+			"Mouse: x=%d, y=%d",
+			controller_state.mouse_x,
+			controller_state.mouse_y
+		);
+		logger->debugf(
+			"Action button down: %s",
+			controller_state.action_button_down ? "true" : "false"
+		);
+
+		update_and_render(&game_state, &controller_state);
 
 		/**
 		 * TODO(jonathan): Look into a better way of doing this that doesn't
