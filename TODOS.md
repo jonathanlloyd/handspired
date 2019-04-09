@@ -4,7 +4,7 @@
  - [X] Launch SDL Window
  - [X] Create game loop with fixed FPS
  - [X] Map controls to controller struct
- - [ ] Create game state struct (prototype, player x & y)
+ - [X] Create game state struct (prototype, player x & y)
  - [ ] Create prototype game update function
     - [ ] Draw player
     - [ ] Move player according to input
