@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "assert.h"
+#include "GameCode.h"
 #include "Logger.h"
 
 #define CGAME_DEFAULT_WINDOW_WIDTH 1080
@@ -54,8 +55,14 @@ int main() {
 	);
 	logger->info("SDL renderer created");
 
+	uint32_t target_ms = ((1.0 / 60.0) * 1000.0);
+
 	bool running = true;
 	uint64_t frame_count = 0;
+	uint32_t time_last_flipped = 0;
+	uint32_t time_last_loop_ended = 0;
+	GameState game_state = {};
+
 	while (running) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
@@ -64,8 +71,25 @@ int main() {
 				running = false;
 			}
 		}
+		update_and_render(&game_state);
+		SDL_Delay(10);
 
-		SDL_Delay(16);
+		/**
+		 * TODO(jonathan): Look into a better way of doing this that doesn't
+		 *                 hammer the CPU.
+		 */
+		uint32_t target_time = time_last_flipped + target_ms;
+		while (true) {
+			if (SDL_GetTicks() >= target_time) {
+				break;
+			}
+		}
+		time_last_flipped = SDL_GetTicks();
+
+		uint32_t current_time = SDL_GetTicks();
+		int32_t loop_time = current_time - time_last_loop_ended;
+		logger->debugf("Loop time: %dms", loop_time);
+		time_last_loop_ended = current_time;
 		frame_count++;
 	}
 
