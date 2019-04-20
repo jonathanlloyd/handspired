@@ -62,7 +62,7 @@ int main() {
 	uint64_t frame_count = 0;
 	uint32_t time_last_flipped = 0;
 	uint32_t time_last_loop_ended = 0;
-	// TODO(jonathan): Move state off the stack?
+	// TODO(@jonathanlloyd): Move state off the stack?
 	GameState game_state = {};
 	ControllerState controller_state = {};
 
